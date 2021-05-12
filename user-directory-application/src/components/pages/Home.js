@@ -1,17 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import useStyles from "./styles";
-import {Card, CardActions, CardActionArea, CardContent, CardMedia, Button, Typography, Avatar, CardHeader, Grow, Grid} from "@material-ui/core"
-
-// card icon pic
-const avatar = "https://alan.app/voice/images/branding_page/icon/color/alan-logo-icon-color.png"
-
-const profile = "https://images.unsplash.com/photo-1586083702768-190ae093d34d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=395&q=80"
+import { Grow, Grid } from "@material-ui/core"
+import Cards from "../card/Card";
 
 const Home = () => {
-    const classes = useStyles();
-
     const [users, setUser] = useState([]);
 
     useEffect(() => {
@@ -65,8 +57,6 @@ const Home = () => {
             })
             }
             </select>
-
-
         <Grow in>
             <Grid
             container
@@ -75,60 +65,16 @@ const Home = () => {
             >
                 {users.filter((user) => {
                     if (searchTerm === "") {
-                        return user
-                    } else if (user.name.toLowerCase().includes(searchTerm.toLowerCase())){
-                        return user
-                    } else if (user.year.includes(searchTerm.toLowerCase())){
-                        return user
-                    }else if (user.country.toLowerCase().includes(searchTerm.toLowerCase())){
-                        return user
+                        return user;
+                    } else if (
+                        Object.values(user)
+                        .toString()
+                        .includes(searchTerm.toLowerCase())
+                    ) {
+                        return user;
                     }
                 }).map((user) => (
-                    <Grid
-                    item
-                    xs={12}
-                    sm={6}
-                    md={4}
-                    lg={3}
-                    key={user.id}
-                    >
-                        <Card>
-                            <CardHeader
-                                avatar={
-                                <Avatar aria-label="recipe">
-                                    <img src={avatar} alt="avatar" height="45px"/>
-                                </Avatar>
-                                }
-                                title={user.name}
-                            />
-                            <CardMedia
-                                className={classes.media}
-                                image={user.pic || profile}
-                            />
-                            <CardContent>
-                                    <Typography variant="body2" color="textSecondary" component="p">
-                                        <b>NAME---</b>{user.name} <br/>
-                                        <b>EMAIL---</b>{user.email} <br/>
-                                        <b>DATE OF BIRTH--</b>{user.dob} <br/>
-                                        <b>COUNTRY---</b>{user.country} <br/>
-                                    </Typography>
-                            </CardContent>
-
-                            <CardActions disableSpacing>
-                            <CardActionArea>
-                                    <Link to={`/users/${user.id}`}>
-                                        <Button size="small" color="primary">View</Button>
-                                    </Link>
-
-                                    <Link to={`/users/edit/${user.id}`}>
-                                        <Button size="small" color="primary" >Update</Button></Link>
-
-                                    <Button size="small" color="primary" onClick={() => deleteUser(user.id)}>Delete</Button>
-
-                            </CardActionArea>
-                            </CardActions>
-                        </Card>
-                    </Grid>
+                    <Cards id={user.id} name={user.name} pic={user.pic} email={user.email} dob={user.dob} country={user.country} deleteUser={deleteUser} />
                 ))}
             </Grid>
         </Grow>

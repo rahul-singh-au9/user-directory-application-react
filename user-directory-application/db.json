@@ -2,7 +2,7 @@
   "users": [
     {
       "id": 1,
-      "name": "Ram",
+      "name": "RAM",
       "email": "ram@gmail.com",
       "country": "india",
       "dob": "1st Jan 1990",
@@ -566,6 +566,15 @@
       "year": "1987",
       "pic": null,
       "id": 63
+    },
+    {
+      "name": "kushal",
+      "email": "kushal@gmail.com",
+      "country": "india",
+      "dob": "1st Sept 1980",
+      "year": "1980",
+      "pic": null,
+      "id": 64
     }
   ]
 }

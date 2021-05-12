@@ -34,7 +34,7 @@ const EditUser = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container" style={{marginTop: '2%'}}>
             <div className="w-75 mx-auto shadow p-5">
                 <Link className="btn btn-primary" to="/">
                       back to Home</Link>
