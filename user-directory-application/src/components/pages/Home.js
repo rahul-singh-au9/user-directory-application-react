@@ -37,7 +37,7 @@ const Home = () => {
             {
             users.map((user) =>{
                 return(
-                    <option value={user.country}>
+                    <option value={user?.country.toLowerCase()}>
                         {user.country}
                     </option>
                 )
@@ -48,13 +48,13 @@ const Home = () => {
             {/* Dob filter */}
             <select onChange={(e) =>{ setSearchTerm(e.target.value)}}>
             {
-            users.map((user) =>{
+            new Set(users.map((user) =>{
                 return(
                     <option value={user.year}>
                         {user.year}
                     </option>
                 )
-            })
+            }))
             }
             </select>
         <Grow in>
